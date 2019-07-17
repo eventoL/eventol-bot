@@ -4,6 +4,5 @@ services:
   app:
     restart: always
     build: .
-    image: devecoop/micoop_bot:${VERSION}
     volumes:
       - .:/code
