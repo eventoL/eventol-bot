@@ -1,5 +1,6 @@
 import os
 import sys
+import random
 import logging
 
 from collections import defaultdict, deque
@@ -7,6 +8,8 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, CallbackQueryHandler
 
 from constants import TRIGGERS
+from stickers import IAN, IAN_LEFT
+
 
 TOKEN = ''
 
@@ -25,6 +28,7 @@ def process_message(bot, update):
 
 def aceptar_cachivache(bot, update):
     username = update.message.from_user.first_name
+    update.message.reply_sticker(random.choice([IAN, IAN_LEFT]))
     update.message.reply_text(f'A mi me sirve {username} Gracias!')
 
 def error(update, context):
