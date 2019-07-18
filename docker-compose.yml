@@ -4,5 +4,6 @@ services:
   app:
     restart: always
     build: .
+    image: devecoop/ropavejero_bot:${VERSION}
     volumes:
       - .:/code

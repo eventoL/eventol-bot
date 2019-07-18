@@ -11,10 +11,10 @@ from constants import TRIGGERS
 from stickers import IAN, IAN_LEFT
 
 
-TOKEN = ''
-
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
+TOKEN = os.environ.get('TOKEN')
+
 
 def process_message(bot, update):
     message_content = update.message.text
