@@ -10,25 +10,27 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 TOKEN = os.environ.get('TOKEN')
 
-from .utils import next_talks
+from utils import next_talks
 
 
 def get_next_talks_handler(bot, update):
     username = update.message.from_user.first_name
     proximas_charlas = next_talks()
-    update.message.reply_text(f'Las próximas charlas son: ')
+    update.message.reply_text(f'Las próximas charlas son: {proximas_charlas}')
 
 
 def level_response_handler(bot, update):
     query = update.callback_query
-    query.edit_message_text(text=f"La/s próxima/s charla/s nivel {query}:")
+    proximas_charlas = next_talks()
+    query.edit_message_text(text=f"La/s próxima/s charla/s nivel {proximas_charlas}:")
 
 
 def ask_talk_level_handler(bot, update):
     keyboard = [[InlineKeyboardButton("Inicial", callback_data='1'),
-                 InlineKeyboardButton("Intermedio", callback_data='2')],
-                 InlineKeyboardButton("Avanzado", callback_data='3')],
-                ]
+                 InlineKeyboardButton("Intermedio", callback_data='2'),
+                 InlineKeyboardButton("Avanzado", callback_data='3'),
+                 InlineKeyboardButton("Todas", callback_data='4') ] ]
+
     reply_markup = InlineKeyboardMarkup(keyboard)
     update.message.reply_text('De qué nivel te gustaría?', reply_markup=reply_markup)
 
